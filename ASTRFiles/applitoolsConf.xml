@@ -1,0 +1,6 @@
+<settings>
+	<apikey>VJMt4z4djBoqW40fclJgEpLGuwGppgZ98m5wtUuWhru0110</apikey>
+	<!-- <Server>https://nintendoeyesapi.applitools.com</Server> -->
+	<MatchLevel>Strict</MatchLevel>
+	<StitchMode>css</StitchMode>
+</settings>

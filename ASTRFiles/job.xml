@@ -1,0 +1,35 @@
+<job concurrent_runs="20">
+	<load>configurations.xml</load>
+	<batch name="ASTR Tests">
+		<test appname="Sample App" testname="Core Sites">
+			<configurations names="grid" />
+			<SmartSplit to="sitemap url groups" max="10" path="sitemap.xml" maxAttempts="5"/>
+			<execute>
+				<action type="crawl" from="sitemap.xml file" createSeparateTests="true" path="sitemap.xml">
+					<foreach>
+						<action type="navigate">exp[%url%]</action>
+						<action type="forcepageload" />
+						<action type="sleep">10000</action>
+                        			<action type="check" target="window" ignoreDisplacementDiffs="true" fullPage="true" useDom="true" enablePatterns="true"/>
+					</foreach>
+				</action> 
+			</execute>
+		</test>
+		<test appname="Sample App" testname="Workflow Test - Login">
+			<configurations names="grid"/> 
+			<execute>
+				<action type="navigate">http://the-internet.herokuapp.com/login</action>
+				<action type="check" target="window">Login Screen</action>
+				<action type="sendkeys" by="css" selector="#username">john.smith@applitools.com</action>
+				<action type="sendkeys" by="css" selector="#password">12345</action>
+				<action type="click" by="css" selector="#login > button > i"></action>
+				<action type="check" target="window">Wrong Password</action>
+				<action type="sendkeys" by="css" selector="#username">tomsmith</action>
+				<action type="sendkeys" by="css" selector="#password">SuperSecretPassword!</action>
+				<action type="click" by="css" selector="#login > button > i"></action>
+				<action type="check" target="window">Logged In</action>
+			</execute>
+		</test>
+		
+	</batch>
+</job>
